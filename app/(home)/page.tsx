@@ -3,6 +3,7 @@ import Image from "next/image"
 import { Button } from "../_components/ui/button"
 import Header from "../_components/header"
 import { ptBR } from "date-fns/locale"
+import Search from "./_components/search"
 
 const name = "test"
 export default function Home() {
@@ -16,6 +17,10 @@ export default function Home() {
             locale: ptBR,
           })}
         </p>
+      </div>
+
+      <div className="mt-6 px-5">
+        <Search />
       </div>
     </div>
   )
