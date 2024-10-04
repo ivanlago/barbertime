@@ -1,8 +1,7 @@
-import { db } from "@/app/_lib/prima"
-import BarbershopInfo from "../_components/barbershop-info"
-import ServiceItem from "../_components/service-item"
+import { db } from "@/app/_lib/prisma"
+import BarbershopInfo from "./_components/barbershop-info"
+import ServiceItem from "./_components/service-item"
 import { getServerSession } from "next-auth"
-import AuthProvider from "@/app/_providers/auth"
 import { authOptions } from "@/app/api/auth/[...nextauth]/route"
 
 interface BarbershopDetailsPageProps {
@@ -44,6 +43,7 @@ const BarbershopDetailsPage = async ({
           <ServiceItem
             key={service.id}
             service={service}
+            barbershop={barbershop}
             isAuthenticated={!!session?.user}
           />
         ))}
