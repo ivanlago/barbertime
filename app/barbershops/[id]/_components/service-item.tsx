@@ -20,6 +20,8 @@ import { generateDayTimeList } from "../_helpers/hours"
 import { format, setHours, setMinutes } from "date-fns"
 import saveBooking from "../_actions/save_bookings"
 import { Loader2 } from "lucide-react"
+import { toast } from "sonner"
+import { useRouter } from "next/navigation"
 
 interface ServiceItemProps {
   barbershop: Barbershop
@@ -36,6 +38,8 @@ const ServiceItem = ({
   const [date, setDate] = useState<Date | undefined>(new Date())
   const [hour, setHour] = useState<string | undefined>()
   const [submitIsLoading, setSubmitIsLoading] = useState(false)
+  const [sheetIsOpen, setSheetIsOpen] = useState(false)
+  const router = useRouter()
 
   const handleDateClick = (date: Date | undefined) => {
     setDate(date)
@@ -69,15 +73,21 @@ const ServiceItem = ({
         userId: (data?.user as any).id,
         date: newDate,
       })
+      setSheetIsOpen(false)
+      toast("Reserva realizada com sucesso.", {
+        description: format(newDate, "'Para' dd 'de' MMMM 'às' HH':'mm'.'", {
+          locale: ptBR,
+        }),
+        action: {
+          label: "Visualizar",
+          onClick: () => router.push("/bookings"),
+        },
+      })
     } catch (error) {
       console.log(error)
     } finally {
       setSubmitIsLoading(false)
     }
-  }
-
-  const handleTeste = () => {
-    console.log("Teste")
   }
 
   const timeList = useMemo(() => {
@@ -110,7 +120,7 @@ const ServiceItem = ({
                 }).format(Number(service.price))}
               </p>
 
-              <Sheet>
+              <Sheet open={sheetIsOpen} onOpenChange={setSheetIsOpen}>
                 <SheetTrigger asChild>
                   <Button variant="secondary" onClick={handleBookingClick}>
                     Reservar
