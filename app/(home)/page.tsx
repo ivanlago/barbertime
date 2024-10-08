@@ -1,6 +1,4 @@
 import { format } from "date-fns"
-import Image from "next/image"
-import { Button } from "../_components/ui/button"
 import Header from "../_components/header"
 import { ptBR } from "date-fns/locale"
 import Search from "./_components/search"
@@ -18,6 +16,8 @@ export default async function Home() {
 
       <div className="px-5 pt-5">
         <h2 className="text-xl font-bold">Olá, Miguel</h2>
+
+        {/* <h2 className="font-bold">{data?.user?.name}</h2> */}
         <p className="text-sm">
           {format(new Date(), "EEEE',' d ' de ' MMMM ' de ' yyyy", {
             locale: ptBR,
