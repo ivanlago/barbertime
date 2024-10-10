@@ -6,17 +6,20 @@ import { Button } from "./ui/button"
 import { MenuIcon } from "lucide-react"
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet"
 import SideMenu from "./side-menu"
+import Link from "next/link"
 
 const Header = () => {
   return (
     <Card>
       <CardContent className="flex flex-row items-center justify-between p-5">
-        <Image
-          src="/logo.png"
-          alt="logo of Barbertime"
-          height={22}
-          width={120}
-        />
+        <Link href="/">
+          <Image
+            src="/logo.png"
+            alt="logo of Barbertime"
+            height={22}
+            width={120}
+          />
+        </Link>
 
         <Sheet>
           <SheetTrigger asChild>
