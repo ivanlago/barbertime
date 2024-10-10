@@ -49,9 +49,11 @@ const BookingsPage = async () => {
       <div className="px-5 py-5">
         <h1 className="text-xl font-bold">Agendamentos</h1>
 
-        <h2 className="mb-3 mt-5 text-sm font-bold uppercase text-gray-400">
-          CONFIRMADOS
-        </h2>
+        {confirmedBookings.length > 0 && (
+          <h2 className="mb-3 mt-5 text-sm font-bold uppercase text-gray-400">
+            CONFIRMADOS
+          </h2>
+        )}
 
         <div className="flex flex-col gap-3">
           {confirmedBookings.map((booking) => (
@@ -59,9 +61,11 @@ const BookingsPage = async () => {
           ))}
         </div>
 
-        <h2 className="mb-3 mt-5 text-sm font-bold uppercase text-gray-400">
-          FINALIZADOS
-        </h2>
+        {finishedBookings.length > 0 && (
+          <h2 className="mb-3 mt-5 text-sm font-bold uppercase text-gray-400">
+            FINALIZADOS
+          </h2>
+        )}
 
         <div className="flex flex-col gap-3">
           {finishedBookings.map((booking) => (
