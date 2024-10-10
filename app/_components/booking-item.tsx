@@ -4,7 +4,7 @@ import { AvatarImage } from "@radix-ui/react-avatar"
 import { Avatar, AvatarFallback } from "./ui/avatar"
 import { Badge } from "./ui/badge"
 import { Card, CardContent } from "./ui/card"
-import { Booking, Prisma } from "@prisma/client"
+import { Prisma } from "@prisma/client"
 import { format, isPast } from "date-fns"
 import { ptBR } from "date-fns/locale"
 import {
@@ -21,6 +21,17 @@ import cancelBooking from "../_actions/cancel-booking"
 import { toast } from "sonner"
 import { useState } from "react"
 import { Loader2 } from "lucide-react"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTrigger,
+  AlertDialogTitle,
+} from "./ui/alert-dialog"
 
 interface BookingItemProps {
   booking: Prisma.BookingGetPayload<{
@@ -157,17 +168,43 @@ const BookingItem = ({ booking }: BookingItemProps) => {
                 Voltar
               </Button>
             </SheetClose>
-            <Button
-              className="w-full"
-              variant="destructive"
-              disabled={isPast(booking.date) || isDeleteLoading}
-              onClick={handleCancelBooking}
-            >
-              {isDeleteLoading && (
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              )}
-              Cancelar Reserva
-            </Button>
+
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button
+                  className="w-full"
+                  variant="destructive"
+                  disabled={isPast(booking.date) || isDeleteLoading}
+                  // onClick={handleCancelBooking}
+                >
+                  {isDeleteLoading && (
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  )}
+                  Cancelar Reserva
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent className="w-[90%]">
+                <AlertDialogHeader>
+                  <AlertDialogTitle>
+                    Deseja reamente deleter a reserva?
+                  </AlertDialogTitle>
+                  <AlertDialogDescription>
+                    Essa ação não poderá ser revertida.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter className="flex flex-row gap-3">
+                  <AlertDialogCancel className="mt-0 w-full">
+                    Vontar
+                  </AlertDialogCancel>
+                  <AlertDialogAction
+                    onClick={handleCancelBooking}
+                    className="w-full"
+                  >
+                    Confirmar
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
         </div>
       </SheetContent>
