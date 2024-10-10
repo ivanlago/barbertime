@@ -60,7 +60,7 @@ const BookingItem = ({ booking }: BookingItemProps) => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Card>
+        <Card className="cursor-pointer">
           <CardContent className="flex px-0 py-0">
             <div className="flex flex-[3] flex-col gap-2 px-5 py-5">
               <Badge
@@ -174,12 +174,8 @@ const BookingItem = ({ booking }: BookingItemProps) => {
                 <Button
                   className="w-full"
                   variant="destructive"
-                  disabled={isPast(booking.date) || isDeleteLoading}
-                  // onClick={handleCancelBooking}
+                  disabled={isPast(booking.date)}
                 >
-                  {isDeleteLoading && (
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  )}
                   Cancelar Reserva
                 </Button>
               </AlertDialogTrigger>
@@ -197,9 +193,13 @@ const BookingItem = ({ booking }: BookingItemProps) => {
                     Vontar
                   </AlertDialogCancel>
                   <AlertDialogAction
+                    disabled={isDeleteLoading}
                     onClick={handleCancelBooking}
                     className="w-full"
                   >
+                    {isDeleteLoading && (
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    )}
                     Confirmar
                   </AlertDialogAction>
                 </AlertDialogFooter>
