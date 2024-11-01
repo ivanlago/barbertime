@@ -14,7 +14,7 @@ const Header = () => {
       <CardContent className="flex flex-row items-center justify-between p-5">
         <Link href="/">
           <Image
-            src="/logo.png"
+            src="/logo2.png"
             alt="logo of Barbertime"
             height={22}
             width={120}
