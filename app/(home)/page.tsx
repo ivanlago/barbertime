@@ -26,11 +26,12 @@ export default async function Home() {
             service: true,
             barbershop: true,
           },
+          orderBy: {
+            date: "asc",
+          },
         })
       : Promise.resolve([]),
   ])
-
-  confirmedBookings.sort((a, b) => a.date.getTime() - b.date.getTime())
 
   return (
     <div>

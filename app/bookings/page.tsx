@@ -24,6 +24,9 @@ const BookingsPage = async () => {
         service: true,
         barbershop: true,
       },
+      orderBy: {
+        date: "asc",
+      },
     }),
 
     db.booking.findMany({
@@ -37,11 +40,11 @@ const BookingsPage = async () => {
         service: true,
         barbershop: true,
       },
+      orderBy: {
+        date: "asc",
+      },
     }),
   ])
-
-  confirmedBookings.sort((a, b) => a.date.getTime() - b.date.getTime())
-  finishedBookings.sort((a, b) => a.date.getTime() - b.date.getTime())
 
   return (
     <div>
